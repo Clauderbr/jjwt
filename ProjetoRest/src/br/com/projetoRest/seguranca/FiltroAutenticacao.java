@@ -29,7 +29,7 @@ public class FiltroAutenticacao implements ContainerRequestFilter{
 	@Override
 	public void filter(ContainerRequestContext requestContext) throws IOException {
 		
-		//Verifica se o header AUTHORIZATION exite ou n√£o se exite extrai o token 
+		//Verifica se o header AUTHORIZATION existe ou n„o se existe extrai o token 
 		//se n√£o abaorta a requisiÁ„o retornando uma NotAuthorizedException
 		String authorizationHeader = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
 		if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
