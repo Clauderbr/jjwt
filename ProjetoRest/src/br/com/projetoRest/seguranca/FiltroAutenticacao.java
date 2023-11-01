@@ -33,7 +33,7 @@ public class FiltroAutenticacao implements ContainerRequestFilter{
 		//se nÃ£o abaorta a requisição retornando uma NotAuthorizedException
 		String authorizationHeader = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
 		if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
-			throw new NotAuthorizedException("Authorization header precisa ser provido");
+			throw new NotAuthorizedException("Authorization header precisa ser fornecido");
 		}
 		//extrai o token do header
 		String token = authorizationHeader.substring("Bearer".length()).trim();
