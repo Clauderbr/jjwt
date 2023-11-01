@@ -17,7 +17,7 @@ import br.com.projetoRest.services.LoginService;
 import io.jsonwebtoken.Claims;
 //Defini que a @seguro que vai utilizar essa classe
 @Seguro
-//Indica que essa classe vai prover a funcionalidade pra @seguro não o contario
+//Indica que essa classe vai prover a funcionalidade pra @seguro n�o o contario
 @Provider
 //E prioridade de execucao, pois podemos ter outras classe filtro
 //que devem ser executas em uma ordem expecifica
@@ -25,12 +25,12 @@ import io.jsonwebtoken.Claims;
 public class FiltroAutenticacao implements ContainerRequestFilter{
 
 	//Aqui fazemos o override do metodo filter  que tem como parametro
-	// o ContainerRequestContext que é o objeto que podemos manipular a request
+	// o ContainerRequestContext que � o objeto que podemos manipular a request
 	@Override
 	public void filter(ContainerRequestContext requestContext) throws IOException {
 		
 		//Verifica se o header AUTHORIZATION exite ou não se exite extrai o token 
-		//se não abaorta a requsição retornando uma NotAuthorizedException
+		//se não abaorta a requisi��o retornando uma NotAuthorizedException
 		String authorizationHeader = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
 		if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
 			throw new NotAuthorizedException("Authorization header precisa ser provido");
@@ -38,15 +38,15 @@ public class FiltroAutenticacao implements ContainerRequestFilter{
 		//extrai o token do header
 		String token = authorizationHeader.substring("Bearer".length()).trim();
 		//verificamos se o metodo é valido ou não
-		//se não for valido  a requisição é abortada e retorna uma resposta com status 401 UNAUTHORIZED
+		//se n�o for v�lido  a requisição é abortada e retorna uma resposta com status 401 UNAUTHORIZED
 		//se for valida modificamos o o SecurityContext da request 
 		//para que quando usarmos o  getUserPrincipal retorne o login do usuario 
 		try {
-			// metodo que verifica  se o token é valido ou não 
+			// metodo que verifica  se o token � valido ou n�o 
 			Claims claims = new LoginService().validaToken(token);
-			//Caso não for valido vai retornar um objeto nulo e executar um exception
+			//Caso n�o for valido vai retornar um objeto nulo e executar um exception
 			if(claims==null)
-				throw new Exception("Token inválido");
+				throw new Exception("Token inv�lido");
 			//Metodo que modifica o SecurityContext pra disponibilizar o login do usuario
 			modificarRequestContext(requestContext,claims.getId());
 		} catch (Exception e) {
@@ -57,7 +57,7 @@ public class FiltroAutenticacao implements ContainerRequestFilter{
 		}
 	}
 	//Metodo que modfica o SecurityContext
-	private void modificarRequestContext(ContainerRequestContext requestContext,String login){
+	private void modificarRequestContext(ContainerRequestContext requestContext,final String login){
 		final SecurityContext currentSecurityContext = requestContext.getSecurityContext();
 		requestContext.setSecurityContext(new SecurityContext() {
 

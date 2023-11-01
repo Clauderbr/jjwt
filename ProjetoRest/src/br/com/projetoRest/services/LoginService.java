@@ -40,7 +40,7 @@ public class LoginService {
 			//Verifica se a crendencial √© valida, se n√£o for vai dar exception 
 			validarCrendenciais(crendencial);
 			//Se a crendencial gera o token e passa a quanidade de dias que o token vai ser valido no caso 1 dia
-			String token = gerarToken(crendencial.getLogin(),1);
+			String token = gerarToken(crendencial.getLogin(),10);
 			//Retorna um reponse com o status 200 OK com o token gerado
 			return Response.ok(token).build();
 		} catch (Exception e) {
@@ -53,7 +53,7 @@ public class LoginService {
 	private void validarCrendenciais(Credencial crendencial) throws Exception {
 		try {
 			if(!crendencial.getLogin().equals("teste") || !crendencial.getSenha().equals("123"))
-				throw new Exception("Crendencias n√£o v√°lidas!");
+				throw new Exception("Crendencias n„o s„o v·lidas!");
 
 		} catch (Exception e) {
 			throw e;

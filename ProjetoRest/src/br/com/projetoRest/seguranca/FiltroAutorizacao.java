@@ -19,14 +19,14 @@ import br.com.projetoRest.model.NivelPermissao;
 import br.com.projetoRest.services.LoginService;
 
 import javax.ws.rs.Priorities;
-//Defini que a @seguro que vai utilizar essa classe
+//Define que a @seguro que vai utilizar essa classe
 @Seguro
-//Indica que essa classe vai prover a funcionalidade pra @seguro n√£o o contario
+//Indica que essa classe vai prover a funcionalidade pra @seguro n„o o contr·rio
 @Provider
-//E prioridade de execucao, pois podemos ter outras classe filtro
-//que devem ser executas em uma ordem expecifica
+//Prioriza essa execucao, pois podemos ter outras classes filtro
+//que podem ou devem ser executadas numa ordem expecifica
 //Nesse caso vai ser executada depois do FiltroAutenticacao,
-//pois a prioridade AUTHENTICATION √© maio que o do AUTHORIZATION
+//pois a prioridade AUTHENTICATION È maior que o do AUTHORIZATION
 @Priority(Priorities.AUTHORIZATION)
 public class FiltroAutorizacao implements ContainerRequestFilter {
 	//O JAX-RS faz a inje√ß√£o do ResourceInfoque vai ter os informa√ß√µes
@@ -99,7 +99,7 @@ public class FiltroAutorizacao implements ContainerRequestFilter {
 			}
 			
 			if(!temPermissao)
-				throw new Exception("Cliente n√£o possui o n√≠vel de permiss√£o para esse m√©todo");
+				throw new Exception("Cliente n„o possui o nÌvel de permiss„o para esse mÈtodo");
 			
 		} catch (Exception e) {
 			e.printStackTrace();
