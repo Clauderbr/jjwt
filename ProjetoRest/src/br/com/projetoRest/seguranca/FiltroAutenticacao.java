@@ -37,7 +37,7 @@ public class FiltroAutenticacao implements ContainerRequestFilter{
 		}
 		//extrai o token do header
 		String token = authorizationHeader.substring("Bearer".length()).trim();
-		//verificamos se o metodo √© valido ou n√£o
+		//verificamos se o metodo È valido ou n„o
 		//se n·o for v·lido  a requisi√ß√£o √© abortada e retorna uma resposta com status 401 UNAUTHORIZED
 		//se for valida modificamos o o SecurityContext da request 
 		//para que quando usarmos o  getUserPrincipal retorne o login do usuario 
