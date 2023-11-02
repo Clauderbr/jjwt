@@ -26,7 +26,7 @@ public class LoginService {
 	//Frase segredo do token, Não passar pra niguem!
 	private final static String FRASE_SEGREDO =  "coloqueAquiFraseSegredoDoToken";
 
-	//Metodo POST que valaida as crendencias enviadas na request 
+	//Metodo POST que valida as crendencias enviadas na request 
 	//e se for validas retorna o token para o cliente	
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -103,7 +103,7 @@ public class LoginService {
 	//aqui seria feitor a verficação de que niveis de permissao o usuario tem e retornar eles
 	public NivelPermissao buscarNivelPermissao(String login) {
 
-		return NivelPermissao.NIVEL_1;
+		return NivelPermissao.NIVEL_2;
 
 	}
 }

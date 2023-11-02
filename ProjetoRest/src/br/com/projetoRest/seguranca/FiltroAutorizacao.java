@@ -46,11 +46,11 @@ public class FiltroAutorizacao implements ContainerRequestFilter {
 		List<NivelPermissao> nivelPermisaoMetodo = extrairNivelPermissao(metodo);
 
 		try {
-			//Como modificamos o securityContext na hora de validar o token, para podemos pegar
-			//O login do usuario, para fazer a verifica√ß√£o se ele tem o nivel de permissao necessario
+			//Como modificamos o securityContext na hora de validar o token, para podermos pegar
+			//O login do usuario, para fazer a verificaÁ„o se ele tem o nivel de permissao necessario
 			//para esse endpoint
 			String login = requestContext.getSecurityContext().getUserPrincipal().getName();
-			// Verifica se o usuario tem permiss√£o pra executar esse metodo
+			// Verifica se o usuario tem permiss„o pra executar esse metodo
 			// Os niveis de acesso do metodo sobrepoe o da classe
 			if (nivelPermisaoMetodo.isEmpty()) {
 				checarPermissoes(nivelPermissaoClasse,login);

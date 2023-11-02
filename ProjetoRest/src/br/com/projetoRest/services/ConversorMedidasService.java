@@ -20,7 +20,7 @@ public class ConversorMedidasService {
 		return Response.ok(quilometros).build();
 	}
 	
-	@Seguro({NivelPermissao.NIVEL_2})
+	@Seguro({NivelPermissao.NIVEL_2,NivelPermissao.NIVEL_3})
 	@GET
 	@Path("milhasParaQuilometros/{milhas}")
 	//Metodo que faz um simples conversão de milhas para quilometros
