@@ -11,16 +11,16 @@ import br.com.projetoRest.seguranca.Seguro;
 @Path("servicos")
 public class ConversorMedidasService {
 
-	@Seguro({NivelPermissao.NIVEL_1})
+	@Seguro({NivelPermissao.GestorUNID,NivelPermissao.AgenteRH})
 	@GET
 	@Path("quilometrosParaMilhas/{quilometros}")
-	//Metodo que faz um simples conversão de quilometro para milhas
+	//Metodo que faz um simples convers�o de quilometro para milhas
 	public Response quilometroParaMilha(@PathParam("quilometros")Double quilometros){
 		quilometros = quilometros / 1.6;
 		return Response.ok(quilometros).build();
 	}
 	
-	@Seguro({NivelPermissao.NIVEL_2,NivelPermissao.NIVEL_3})
+	@Seguro({NivelPermissao.NIVEL_2,NivelPermissao.NIVEL_3,NivelPermissao.GestorUNID})
 	@GET
 	@Path("milhasParaQuilometros/{milhas}")
 	//Metodo que faz um simples conversão de milhas para quilometros

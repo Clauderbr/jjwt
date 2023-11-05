@@ -29,7 +29,7 @@ public class FiltroAutenticacao implements ContainerRequestFilter{
 	@Override
 	public void filter(ContainerRequestContext requestContext) throws IOException {
 		
-		//Verifica se o header AUTHORIZATION existe ou n„o, se existe extrai o token 
+		//Verifica se o header AUTHORIZATION existe ou n„o. Se existe extrai o token, 
 		//se n√£o abaorta a requisiÁ„o retornando uma NotAuthorizedException
 		String authorizationHeader = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
 		if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
@@ -48,7 +48,7 @@ public class FiltroAutenticacao implements ContainerRequestFilter{
 			if(claims==null)
 				throw new Exception("Token inv·lido");
 			//Metodo que modifica o SecurityContext pra disponibilizar o login do usuario
-			modificarRequestContext(requestContext,claims.getId());
+			modificarRequestContext(requestContext,(String)claims.get("usuarioId"));
 		} catch (Exception e) {
 			e.printStackTrace();
 			//Caso o token for invalido a requisi√ß√£o √© abortada e retorna uma resposta com status 401 UNAUTHORIZED

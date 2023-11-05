@@ -2,6 +2,8 @@ package br.com.projetoRest.services;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.crypto.spec.SecretKeySpec;
 import javax.ws.rs.Consumes;
@@ -71,16 +73,24 @@ public class LoginService {
 		//Encoda a frase sergredo pra base64 pra ser usada na geração do token 
 		byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(FRASE_SEGREDO);
 		SecretKeySpec key = new SecretKeySpec(apiKeySecretBytes, algoritimoAssinatura.getJcaName());
-		//E finalmente utiliza o JWT builder pra gerar o token
+        // Criar um conjunto de reivindica��es
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("usuarioId", login);
+        claims.put("nome", "Clauder Araujo Lima");
+        claims.put("iat", agora);
+        claims.put("expiration", expira.getTime());
+        claims.put("iss","Minha Casa & Cia LTDA");
 		JwtBuilder construtor = Jwts.builder()
-				.setIssuedAt(agora)//Data que o token foi gerado
-				.setIssuer(login)//Coloca o login do usuario mais podia qualquer outra informação
-				.signWith(algoritimoAssinatura, key)//coloca o algoritimo de assinatura e frase segredo ja encodada
-				.setExpiration(expira.getTime());// coloca até que data que o token é valido
-
-		return construtor.compact();//Constroi o token retorando a string dele
-	}
-
+//				.setIssuedAt(agora) //Data que o token foi gerado
+//				.setIssuer(login) //Coloca o login do usuario mais podia qualquer outra informação
+				.signWith(algoritimoAssinatura, key) //coloca o algoritimo de assinatura e frase segredo ja encodada
+//				.setExpiration(expira.getTime()) // coloca até que data que o token é valido
+				.setClaims(claims);
+		
+		return construtor.compact(); //Constroi o token retorando a string dele
+		
+	}   
+	
 	public  Claims validaToken(String token) {
 		try{
 			//JJWT vai validar o token caso o token não seja valido ele vai executar uma exeption
@@ -98,12 +108,16 @@ public class LoginService {
 		}
 	}
 
-	//Metodo simples como não usamos banco de dados e foco é o parte autenticação
+	//Metodo simples como n�o usamos banco de dados e foco é o parte autenticação
 	//o metodo retorna somente um nivel de acesso, mas em uma aplicação normal
-	//aqui seria feitor a verficação de que niveis de permissao o usuario tem e retornar eles
+	//aqui deve ser efetuada a verfica��o de que niveis de permiss�es do usu�rio tem e retornar eles
 	public NivelPermissao buscarNivelPermissao(String login) {
-
-		return NivelPermissao.NIVEL_2;
-
+		
+		NivelPermissao nivelPermissao = null;
+		if (login.contains("teste"))
+		{
+			nivelPermissao = NivelPermissao.AgenteRH;
+		}
+		return nivelPermissao;
 	}
 }

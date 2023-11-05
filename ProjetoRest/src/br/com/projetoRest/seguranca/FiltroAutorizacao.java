@@ -29,8 +29,8 @@ import javax.ws.rs.Priorities;
 //pois a prioridade AUTHENTICATION È maior que o do AUTHORIZATION
 @Priority(Priorities.AUTHORIZATION)
 public class FiltroAutorizacao implements ContainerRequestFilter {
-	//O JAX-RS faz a inje√ß√£o do ResourceInfoque vai ter os informa√ß√µes
-	//do metodo que ta sendo verificado 
+	//O JAX-RS faz a injeÁ„o do ResourceInfoque vai ter os informa√ß√µes
+	//do mÈtodo que est· sendo verificado 
 	@Context
 	private ResourceInfo resourceInfo;
 	@Override
@@ -79,7 +79,7 @@ public class FiltroAutorizacao implements ContainerRequestFilter {
 			}
 		}
 	}
-	//Verifica se o usuario tem permissao pra executar o metodo, se n√£o for definido nenhum nivel de acesso no @Seguro,
+	//Verifica se o usuario tem permissao pra executar o metodo, se n„o for definido nenhum nÌvel de acesso no @Seguro,
 	//Entao todos vao poder executar desde que possuam um token valido
 	private void checarPermissoes(List<NivelPermissao> nivelPermissaoPermitidos,String login) throws Exception {
 		try {
