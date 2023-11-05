@@ -79,7 +79,7 @@ public class FiltroAutorizacao implements ContainerRequestFilter {
 			}
 		}
 	}
-	//Verifica se o usuario tem permissao pra executar o metodo, se não for definido nenhum nível de acesso no @Seguro,
+	//Verifica se o usuario tem permissao para executar o metodo, se não for definido nenhum nível de acesso no @Seguro,
 	//Entao todos vao poder executar desde que possuam um token valido
 	private void checarPermissoes(List<NivelPermissao> nivelPermissaoPermitidos,String login) throws Exception {
 		try {
